@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meşkhanem — Tasavvuf, Musiki ve Tefekkür Kütüphanesi</title>
-  <meta name="description" content="Meşkhanem e-kitap kütüphanesi. Tasavvufi tefekkür eserleri, seyr-i sülük günlükleri ve manevi rehberler. 3D sayfa çevirme animasyonlu PDF önizleme ve Shopier ile güvenli ödeme.">
+  <meta name="description" content="Meşkhanem e-kitap kütüphanesi. Tasavvufi tefekkür eserleri, seyr-i sülük günlükleri ve manevi rehberler. Instagram Story paylaşımı, 3D sayfa çevirme ve Shopier ödemesi.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -385,6 +385,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: opacity 0.2s ease;
     }
 
     .wisdom-author {
@@ -394,6 +395,7 @@
       color: var(--gold-light);
       text-transform: uppercase;
       margin-bottom: 24px;
+      transition: opacity 0.2s ease;
     }
 
     .wisdom-actions {
@@ -401,6 +403,29 @@
       justify-content: center;
       gap: 14px;
       flex-wrap: wrap;
+    }
+
+    .btn-story {
+      background: linear-gradient(45deg, #F58529, #D62976, #962FBF, #4F5BD5);
+      color: #FFFFFF;
+      font-weight: 700;
+      padding: 12px 26px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(214, 41, 118, 0.4);
+      transition: var(--transition);
+    }
+
+    .btn-story:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(214, 41, 118, 0.7);
+      filter: brightness(1.1);
     }
 
     /* Quiz */
@@ -902,9 +927,7 @@
       color: var(--gold-light);
     }
 
-    /* =========================================================================
-       REALISTIC 3D FLIPBOOK & PAGE-TURN ANIMATION COMPONENT
-       ========================================================================= */
+    /* 3D Flipbook */
     .flipbook-container {
       perspective: 2000px;
       margin: 24px auto;
@@ -947,7 +970,6 @@
     @keyframes turnPageForward {
       0% {
         transform: rotateY(0deg) scale(1);
-        box-shadow: 5px 12px 30px rgba(0,0,0,0.5);
       }
       50% {
         transform: rotateY(-50deg) scale(0.96) skewY(2deg);
@@ -956,7 +978,6 @@
       }
       100% {
         transform: rotateY(0deg) scale(1);
-        box-shadow: 5px 12px 30px rgba(0,0,0,0.5);
       }
     }
 
@@ -1201,10 +1222,10 @@
         </div>
       </div>
       <div class="stat-item">
-        <i class="fa-solid fa-book-open-reader stat-icon"></i>
+        <i class="fa-solid fa-camera-retro stat-icon"></i>
         <div class="stat-text">
-          <h4>3D Sayfa Çevirme Deneyimi</h4>
-          <p>Her kitabın orijinal ilk 3 sayfasını gerçekçi geçişle okuyun</p>
+          <h4>Instagram Story Paylaşımı</h4>
+          <p>Günün tefekkürünü tek tıkla özel hikaye görseliyle paylaşın</p>
         </div>
       </div>
     </div>
@@ -1227,7 +1248,9 @@
     </div>
   </section>
 
-  <!-- Günün Tefekkürü -->
+  <!-- =========================================================================
+       1. GÜNÜN TEFEKKÜRÜ (INSTAGRAM STORY PAYLAŞIM ENTEGRELİ)
+       ========================================================================= -->
   <section class="wisdom-section" id="tefekkur-karti">
     <div class="section-tag">HİKMET ÇEŞMESİ</div>
     <h2 class="section-title" style="margin-bottom:24px;">Günün Tefekkürü</h2>
@@ -1242,11 +1265,14 @@
       </div>
 
       <div class="wisdom-actions">
-        <button class="btn-gold" style="padding:10px 22px; font-size:13px;" onclick="drawNewWisdomCard()">
-          <i class="fa-solid fa-shuffle"></i> Yeni Bir Hikmet Kartı Çek
+        <button class="btn-story" onclick="shareWisdomToInstagramStory()">
+          <i class="fa-brands fa-instagram"></i> Instagram Hikayede Paylaş
         </button>
-        <button class="btn-outline" style="padding:10px 20px; font-size:13px;" onclick="copyWisdomCard()">
-          <i class="fa-solid fa-copy"></i> Sözü Kopyala / Paylaş
+        <button class="btn-gold" style="padding:10px 20px; font-size:13px;" onclick="drawNewWisdomCard()">
+          <i class="fa-solid fa-shuffle"></i> Yeni Kart Çek
+        </button>
+        <button class="btn-outline" style="padding:10px 18px; font-size:13px;" onclick="copyWisdomCard()">
+          <i class="fa-solid fa-copy"></i> Metni Kopyala
         </button>
       </div>
     </div>
@@ -1534,9 +1560,7 @@
     </div>
   </div>
 
-  <!-- =========================================================================
-       3D REALISTIC FLIPBOOK / SAYFALARA GÖZ AT MODALI
-       ========================================================================= -->
+  <!-- 3D REALISTIC FLIPBOOK MODAL -->
   <div class="modal-overlay" id="sampleReaderModal">
     <div class="modal-box" style="max-width:740px;">
       <button class="modal-close" onclick="closeModal('sampleReaderModal')"><i class="fa-solid fa-xmark"></i></button>
@@ -1671,7 +1695,7 @@
     let cart = [];
 
     // =========================================================================
-    // 1. GÜNÜN TEFEKKÜRÜ KARTLARI
+    // 1. GÜNÜN TEFEKKÜRÜ (INSTAGRAM STORY DİNAMİK CANVAS RENDER)
     // =========================================================================
     const WISDOM_CARDS = [
       { quote: "Aradığın seni arayandır. Kapı kapalıysa, belki de tokmağı içeriden çevirmek gerekiyordur.", author: "Mevlânâ Celâleddîn-i Rûmî" },
@@ -1711,6 +1735,166 @@
       });
     }
 
+    // DYNAMIC INSTAGRAM STORY SHARING
+    function shareWisdomToInstagramStory() {
+      const c = WISDOM_CARDS[currentWisdomIdx];
+      
+      // Create offscreen canvas for 1080x1920 Instagram Story format
+      const canvas = document.createElement('canvas');
+      canvas.width = 1080;
+      canvas.height = 1920;
+      const ctx = canvas.getContext('2d');
+      
+      // 1. Background Gradient
+      const grad = ctx.createLinearGradient(0, 0, 0, 1920);
+      grad.addColorStop(0, '#060A14');
+      grad.addColorStop(0.5, '#121B30');
+      grad.addColorStop(1, '#060A14');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1080, 1920);
+      
+      // 2. Borders & Corner Ornaments
+      ctx.strokeStyle = '#D4AF37';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(60, 60, 960, 1800);
+      
+      ctx.strokeStyle = '#8C6D23';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(76, 76, 928, 1768);
+      
+      const corners = [[76, 76], [1004, 76], [76, 1844], [1004, 1844]];
+      ctx.fillStyle = '#F5E6B3';
+      corners.forEach(([cx, cy]) => {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - 10);
+        ctx.lineTo(cx + 10, cy);
+        ctx.lineTo(cx, cy + 10);
+        ctx.lineTo(cx - 10, cy);
+        ctx.closePath();
+        ctx.fill();
+      });
+      
+      // 3. Top Header
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = 'bold 28px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('✦  M E Ş K H A N E M  ✦', 540, 240);
+      
+      ctx.fillStyle = '#F5E6B3';
+      ctx.font = 'italic 30px "Cinzel", serif';
+      ctx.fillText('GÜNÜN TEFEKKÜRÜ', 540, 305);
+      
+      ctx.strokeStyle = '#D4AF37';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(540 - 160, 345);
+      ctx.lineTo(540 + 160, 345);
+      ctx.stroke();
+      
+      // 4. Large Quote Mark
+      ctx.fillStyle = 'rgba(212, 175, 55, 0.4)';
+      ctx.font = 'bold 180px "Cormorant Garamond", serif';
+      ctx.fillText('“', 540, 560);
+      
+      // 5. Wrap Quote Text
+      ctx.fillStyle = '#FAF8F5';
+      ctx.font = 'italic 46px "Cormorant Garamond", serif';
+      
+      const words = c.quote.split(' ');
+      let lines = [];
+      let currentLine = '';
+      const maxWidth = 820;
+      
+      words.forEach(word => {
+        const testLine = currentLine ? currentLine + ' ' + word : word;
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > maxWidth) {
+          lines.push(currentLine);
+          currentLine = word;
+        } else {
+          currentLine = testLine;
+        }
+      });
+      if (currentLine) lines.push(currentLine);
+      
+      const lineHeight = 66;
+      const startY = 760 - (lines.length * lineHeight) / 2;
+      
+      lines.forEach((line, i) => {
+        ctx.fillText(line, 540, startY + i * lineHeight);
+      });
+      
+      // 6. Author
+      const authorY = startY + lines.length * lineHeight + 75;
+      ctx.strokeStyle = '#D4AF37';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(540 - 120, authorY);
+      ctx.lineTo(540 + 120, authorY);
+      ctx.stroke();
+      
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = 'bold 32px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('— ' + c.author, 540, authorY + 55);
+      
+      // 7. Bottom Branding Box
+      ctx.fillStyle = 'rgba(16, 23, 38, 0.9)';
+      ctx.fillRect(160, 1460, 760, 220);
+      ctx.strokeStyle = '#D4AF37';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(160, 1460, 760, 220);
+      
+      ctx.fillStyle = '#F5E6B3';
+      ctx.font = 'bold 36px "Cinzel", serif';
+      ctx.fillText('@mesk.hanem', 540, 1535);
+      
+      ctx.fillStyle = '#A3B1CC';
+      ctx.font = '24px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Tasavvuf, Musiki & E-Kitap Kütüphanesi', 540, 1590);
+      
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = 'italic 20px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('🔗 Biyografideki Linkten Eserlere Ulaşabilirsiniz', 540, 1640);
+      
+      // 8. Trigger Web Share API or Fallback
+      canvas.toBlob(async (blob) => {
+        if (!blob) return;
+        const file = new File([blob], 'meskhanem_gunun_tefekkuru_story.png', { type: 'image/png' });
+        
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({
+              files: [file],
+              title: 'Meşkhanem Günün Tefekkürü',
+              text: `"${c.quote}" — ${c.author} (@mesk.hanem)`
+            });
+          } catch (err) {
+            if (err.name !== 'AbortError') {
+              handleStoryDownloadFallback(canvas);
+            }
+          }
+        } else {
+          handleStoryDownloadFallback(canvas);
+        }
+      }, 'image/png');
+    }
+
+    function handleStoryDownloadFallback(canvas) {
+      const link = document.createElement('a');
+      link.download = 'Meskhanem_Gunun_Tefekkuru_Story.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      
+      setTimeout(() => {
+        if (confirm('Story görseliniz yüksek kalitede indirildi! Instagram uygulamasını açıp hikayenizde paylaşmak ister misiniz?')) {
+          window.open('instagram://story-camera', '_blank');
+          setTimeout(() => {
+            window.open('https://instagram.com', '_blank');
+          }, 1000);
+        }
+      }, 300);
+    }
+
     // =========================================================================
     // 2. "HANGİ KAPIDASIN?" AKILLI REHBER TESTİ
     // =========================================================================
@@ -1743,7 +1927,7 @@
     }
 
     // =========================================================================
-    // 3. 3D GERÇEKÇİ SAYFA ÇEVİRME ANİMASYONLU DEMO OKUYUCU
+    // 3. 3D REALISTIC FLIPBOOK READER
     // =========================================================================
     let currentSampleBook = null;
     let currentSamplePageIdx = 0;
